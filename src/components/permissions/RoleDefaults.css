@@ -1,0 +1,93 @@
+.role-defaults {
+  width: 100%;
+}
+
+.role-defaults__table-wrapper {
+  overflow-x: auto;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-6);
+}
+
+.role-defaults__entity-header {
+  min-width: 250px;
+}
+
+.role-defaults__role-header {
+  text-align: center;
+  min-width: 150px;
+}
+
+.role-defaults__entity-cell {
+  font-weight: var(--font-weight-medium);
+}
+
+.role-defaults__entity-label {
+  position: relative;
+}
+
+.role-defaults__entity-label--child {
+  color: hsl(var(--muted-foreground));
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-sm);
+}
+
+.role-defaults__entity-label--child::before {
+  content: '└ ';
+  color: hsl(var(--border));
+  margin-right: var(--space-2);
+}
+
+.role-defaults__permissions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.role-defaults__permission {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.role-defaults__icon {
+  flex-shrink: 0;
+}
+
+.role-defaults__icon--granted {
+  color: hsl(142 76% 36%);
+}
+
+.role-defaults__icon--denied {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.5;
+}
+
+.role-defaults__legend {
+  padding: var(--space-4);
+  background-color: hsl(var(--muted));
+  border-radius: var(--radius-md);
+}
+
+.role-defaults__legend-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: hsl(var(--foreground));
+  margin: 0 0 var(--space-3) 0;
+}
+
+.role-defaults__legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-size: var(--font-size-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+.role-defaults__legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
