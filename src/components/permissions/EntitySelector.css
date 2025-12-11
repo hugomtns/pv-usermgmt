@@ -1,0 +1,109 @@
+.entity-selector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.entity-selector__label {
+  font-weight: var(--font-weight-semibold);
+  color: hsl(var(--foreground));
+}
+
+.entity-selector__scope {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.entity-selector__radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.entity-selector__radio {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.entity-selector__radio:hover {
+  background-color: hsl(var(--accent));
+  border-color: hsl(var(--ring));
+}
+
+.entity-selector__radio--active {
+  background-color: hsl(var(--accent));
+  border-color: hsl(var(--ring));
+  border-width: 2px;
+}
+
+.entity-selector__radio-input {
+  cursor: pointer;
+}
+
+.entity-selector__radio-label {
+  cursor: pointer;
+  font-weight: var(--font-weight-normal);
+  margin: 0;
+}
+
+.entity-selector__specific {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-md);
+  background-color: hsl(var(--muted));
+}
+
+.entity-selector__empty {
+  font-size: var(--font-size-sm);
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+  padding: var(--space-4);
+  margin: 0;
+}
+
+.entity-selector__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-height: 200px;
+  overflow-y: auto;
+  padding: var(--space-2);
+}
+
+.entity-selector__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.entity-selector__item:hover {
+  background-color: hsl(var(--accent));
+}
+
+.entity-selector__item-label {
+  cursor: pointer;
+  font-weight: var(--font-weight-normal);
+  margin: 0;
+}
+
+.entity-selector__count {
+  font-size: var(--font-size-sm);
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+  margin: 0;
+  padding-top: var(--space-2);
+  border-top: 1px solid hsl(var(--border));
+}
