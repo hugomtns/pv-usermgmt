@@ -81,3 +81,28 @@
   color: hsl(var(--muted-foreground));
   opacity: 0.5;
 }
+
+@media (max-width: 768px) {
+  .user-permission-preview {
+    max-width: 95vw;
+  }
+
+  .user-permission-preview__table-wrapper {
+    max-height: 300px;
+    font-size: var(--font-size-xs);
+  }
+
+  .user-permission-preview__action-header {
+    min-width: 60px;
+    font-size: var(--font-size-xs);
+    padding: var(--space-2);
+  }
+
+  .user-permission-preview__entity-cell--child {
+    font-size: 11px;
+  }
+
+  .user-permission-preview__info-item {
+    font-size: var(--font-size-xs);
+  }
+}
