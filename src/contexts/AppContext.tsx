@@ -3,28 +3,19 @@ import { AppState, AppAction } from './AppContext.types';
 import { seedUsers } from '@/data/seedUsers';
 import { seedGroups } from '@/data/seedGroups';
 import { seedEntities } from '@/data/seedEntities';
-
-const STORAGE_KEY = 'pv-usermgmt-state';
+import { getStorageItem, setStorageItem, STORAGE_KEYS } from '@/utils/storage';
 
 // Initial state from seed data
 const getInitialState = (): AppState => {
-  // Try to load from localStorage first
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    try {
-      return JSON.parse(stored);
-    } catch (error) {
-      console.error('Failed to parse stored state:', error);
-    }
-  }
-
-  // Fall back to seed data
-  return {
+  const seedState: AppState = {
     users: seedUsers,
     groups: seedGroups,
     entities: seedEntities,
     permissionOverrides: [],
   };
+
+  // Try to load from localStorage first, fall back to seed data
+  return getStorageItem(STORAGE_KEYS.APP_STATE, seedState);
 };
 
 // Reducer function
@@ -135,7 +126,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // Persist state changes to localStorage
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    setStorageItem(STORAGE_KEYS.APP_STATE, state);
   }, [state]);
 
   return (
