@@ -1,4 +1,4 @@
-import { Shield, Trash2, Check } from 'lucide-react';
+import { Shield, Trash2, Check, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -7,7 +7,11 @@ import { useToast } from '@/hooks/use-toast';
 import { EntityType } from '@/types';
 import './GroupOverrides.css';
 
-export function GroupOverrides() {
+interface GroupOverridesProps {
+  readOnly?: boolean;
+}
+
+export function GroupOverrides({ readOnly = false }: GroupOverridesProps) {
   const { state, dispatch } = useApp();
   const { toast } = useToast();
 
@@ -114,14 +118,26 @@ export function GroupOverrides() {
                         {getEntityTypeLabel(override.entityType)}
                       </p>
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleDelete(override.id, groupName)}
-                      className="group-overrides__delete-button"
-                    >
-                      <Trash2 size={16} strokeWidth={1.5} />
-                    </Button>
+                    {readOnly ? (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => window.location.hash = '#groups'}
+                        className="group-overrides__edit-link"
+                      >
+                        <ExternalLink size={16} strokeWidth={1.5} />
+                        Edit in Groups
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleDelete(override.id, groupName)}
+                        className="group-overrides__delete-button"
+                      >
+                        <Trash2 size={16} strokeWidth={1.5} />
+                      </Button>
+                    )}
                   </div>
 
                   <div className="group-overrides__item-details">

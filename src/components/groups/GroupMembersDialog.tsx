@@ -130,7 +130,7 @@ export function GroupMembersDialog({ group, open, onOpenChange }: GroupMembersDi
                           {user.firstName} {user.lastName}
                         </span>
                         <span className="group-members-dialog__user-details">
-                          {user.function} • {user.role}
+                          {user.function} • {state.roles.find(r => r.id === user.roleId)?.name ?? 'Unknown'}
                         </span>
                       </div>
                     </Label>

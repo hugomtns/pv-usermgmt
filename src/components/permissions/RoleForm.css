@@ -1,0 +1,127 @@
+.role-form {
+  max-width: 800px;
+}
+
+.role-form__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.role-form__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: var(--space-2);
+}
+
+.role-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.role-form__input--error {
+  border-color: var(--color-destructive);
+}
+
+.role-form__error {
+  font-size: var(--font-size-sm);
+  color: var(--color-destructive);
+  font-weight: var(--font-weight-medium);
+}
+
+.role-form__hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-muted-foreground);
+  font-style: italic;
+}
+
+.role-form__permissions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.role-form__permissions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.role-form__matrix {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.role-form__matrix-header {
+  display: grid;
+  grid-template-columns: 1fr 50px 50px 50px 50px;
+  background: var(--color-muted);
+  border-bottom: 1px solid var(--color-border);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+}
+
+.role-form__matrix-header > div {
+  padding: var(--space-3);
+  text-align: center;
+}
+
+.role-form__matrix-entity {
+  text-align: left !important;
+  font-weight: var(--font-weight-medium);
+}
+
+.role-form__matrix-entity--child {
+  color: var(--color-muted-foreground);
+  font-size: var(--font-size-sm);
+}
+
+.role-form__matrix-row {
+  display: grid;
+  grid-template-columns: 1fr 50px 50px 50px 50px;
+  border-bottom: 1px solid var(--color-border);
+  align-items: center;
+}
+
+.role-form__matrix-row:last-child {
+  border-bottom: none;
+}
+
+.role-form__matrix-row > div {
+  padding: var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.role-form__matrix-row > .role-form__matrix-entity {
+  justify-content: flex-start;
+}
+
+.role-form__matrix-legend {
+  font-size: var(--font-size-sm);
+  color: var(--color-muted-foreground);
+  text-align: center;
+  padding: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .role-form {
+    max-width: 100%;
+  }
+
+  .role-form__matrix-header,
+  .role-form__matrix-row {
+    grid-template-columns: 1fr 40px 40px 40px 40px;
+  }
+
+  .role-form__matrix-header > div,
+  .role-form__matrix-row > div {
+    padding: var(--space-2);
+  }
+}

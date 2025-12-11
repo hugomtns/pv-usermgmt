@@ -45,8 +45,12 @@ export function UserList({ onEditUser, onViewPermissions }: UserListProps) {
     return groupNames.length > 0 ? groupNames.join(', ') : 'None';
   };
 
-  const getRoleBadgeVariant = (role: string) => {
-    switch (role) {
+  const getRoleName = (roleId: string): string => {
+    return state.roles.find(r => r.id === roleId)?.name ?? 'Unknown';
+  };
+
+  const getRoleBadgeVariant = (roleName: string) => {
+    switch (roleName.toLowerCase()) {
       case 'admin':
         return 'default';
       case 'user':
@@ -102,8 +106,8 @@ export function UserList({ onEditUser, onViewPermissions }: UserListProps) {
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.function}</TableCell>
                   <TableCell>
-                    <Badge variant={getRoleBadgeVariant(user.role)}>
-                      {user.role}
+                    <Badge variant={getRoleBadgeVariant(getRoleName(user.roleId))}>
+                      {getRoleName(user.roleId)}
                     </Badge>
                   </TableCell>
                   <TableCell className="user-list__groups">

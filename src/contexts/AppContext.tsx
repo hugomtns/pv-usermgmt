@@ -3,6 +3,7 @@ import { AppState, AppAction } from './AppContext.types';
 import { seedUsers } from '@/data/seedUsers';
 import { seedGroups } from '@/data/seedGroups';
 import { seedEntities } from '@/data/seedEntities';
+import { seedRoles } from '@/data/seedRoles';
 import { getStorageItem, setStorageItem, STORAGE_KEYS } from '@/utils/storage';
 
 // Initial state from seed data
@@ -11,11 +12,53 @@ const getInitialState = (): AppState => {
     users: seedUsers,
     groups: seedGroups,
     entities: seedEntities,
+    roles: seedRoles,
     permissionOverrides: [],
   };
 
   // Try to load from localStorage first, fall back to seed data
-  return getStorageItem(STORAGE_KEYS.APP_STATE, seedState);
+  const storedState = getStorageItem(STORAGE_KEYS.APP_STATE, seedState);
+
+  // Migrate old state: ensure roles array exists and users have roleId
+  let needsMigration = false;
+  let migratedState = { ...storedState };
+
+  // Add roles if missing
+  if (!storedState.roles || !Array.isArray(storedState.roles)) {
+    migratedState.roles = seedRoles;
+    needsMigration = true;
+  }
+
+  // Migrate users from old 'role' property to new 'roleId' property
+  const migratedUsers = storedState.users.map((user: any) => {
+    if (user.role && !user.roleId) {
+      needsMigration = true;
+      // Map old role values to new roleId values
+      const roleMapping: Record<string, string> = {
+        'admin': 'role-admin',
+        'user': 'role-user',
+        'viewer': 'role-viewer',
+      };
+      const roleId = roleMapping[user.role] || 'role-user';
+      const { role, ...rest } = user;
+      return { ...rest, roleId };
+    }
+    // Also clean up users that have both role and roleId (remove role)
+    if (user.role && user.roleId) {
+      needsMigration = true;
+      const { role, ...rest } = user;
+      return rest;
+    }
+    return user;
+  });
+
+  if (needsMigration) {
+    migratedState.users = migratedUsers;
+    // Save migrated state back to localStorage
+    setStorageItem(STORAGE_KEYS.APP_STATE, migratedState);
+  }
+
+  return migratedState;
 };
 
 // Reducer function
@@ -71,6 +114,24 @@ function appReducer(state: AppState, action: AppAction): AppState {
         ),
       };
 
+    // Role actions
+    case 'ADD_ROLE':
+      return { ...state, roles: [...state.roles, action.payload] };
+
+    case 'UPDATE_ROLE':
+      return {
+        ...state,
+        roles: state.roles.map(role =>
+          role.id === action.payload.id ? action.payload : role
+        ),
+      };
+
+    case 'DELETE_ROLE':
+      return {
+        ...state,
+        roles: state.roles.filter(role => role.id !== action.payload),
+      };
+
     // Permission override actions
     case 'ADD_PERMISSION_OVERRIDE':
       return {
@@ -103,6 +164,7 @@ function appReducer(state: AppState, action: AppAction): AppState {
         users: seedUsers,
         groups: seedGroups,
         entities: seedEntities,
+        roles: seedRoles,
         permissionOverrides: [],
       };
 

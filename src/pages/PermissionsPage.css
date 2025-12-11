@@ -52,7 +52,21 @@
 .permissions-page__overrides-main {
   display: flex;
   flex-direction: column;
+  gap: var(--space-4);
   min-width: 0;
+}
+
+.permissions-page__notice {
+  padding: var(--space-4);
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+}
+
+.permissions-page__notice-text {
+  font-size: var(--font-size-sm);
+  color: hsl(var(--muted-foreground));
+  margin: 0;
 }
 
 @media (max-width: 1200px) {

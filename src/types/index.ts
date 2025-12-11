@@ -1,4 +1,4 @@
-export type { Role, User } from './user';
+export type { User } from './user';
 export type { UserGroup } from './group';
 export type { EntityType, Entity } from './entity';
 export type {
@@ -8,3 +8,4 @@ export type {
   RolePermissions,
   GroupPermissionOverride
 } from './permission';
+export type { CustomRole } from './role';

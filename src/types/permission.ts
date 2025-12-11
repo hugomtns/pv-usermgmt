@@ -1,4 +1,3 @@
-import { Role } from './user';
 import { EntityType } from './entity';
 
 export type PermissionAction = 'create' | 'read' | 'update' | 'delete';
@@ -12,9 +11,9 @@ export interface PermissionSet {
   delete: PermissionValue;
 }
 
-// Role-based default permissions (baseline)
+// Role-based default permissions (baseline) - DEPRECATED: Use CustomRole instead
 export interface RolePermissions {
-  role: Role;
+  role: string;  // Changed from Role type (no longer exists)
   permissions: Record<EntityType, PermissionSet>;
 }
 

@@ -41,8 +41,9 @@ export function UserPermissionPreview({ user, open, onOpenChange }: UserPermissi
 
   if (!user) return null;
 
-  const effectivePermissions = resolveAllPermissions(user, state.permissionOverrides);
+  const effectivePermissions = resolveAllPermissions(user, state.permissionOverrides, state.roles);
   const userGroupNames = user.groupIds.map(id => state.groups.find(g => g.id === id)?.name).filter(Boolean);
+  const roleName = state.roles.find(r => r.id === user.roleId)?.name ?? 'Unknown';
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -61,7 +62,7 @@ export function UserPermissionPreview({ user, open, onOpenChange }: UserPermissi
           <div className="user-permission-preview__user-info">
             <div className="user-permission-preview__info-item">
               <span className="user-permission-preview__info-label">Role:</span>
-              <Badge variant="secondary">{user.role}</Badge>
+              <Badge variant="secondary">{roleName}</Badge>
             </div>
             <div className="user-permission-preview__info-item">
               <span className="user-permission-preview__info-label">Groups:</span>

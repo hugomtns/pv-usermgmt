@@ -1,7 +1,7 @@
 import { Check, X } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { defaultRolePermissions } from '@/data/defaultPermissions';
+import { useApp } from '@/contexts/AppContext';
 import { EntityType, PermissionSet } from '@/types';
 import './RoleDefaults.css';
 
@@ -52,12 +52,14 @@ function PermissionCell({ permissions }: { permissions: PermissionSet }) {
 }
 
 export function RoleDefaults() {
-  const getPermissionsForRole = (role: 'admin' | 'user' | 'viewer', entityType: EntityType): PermissionSet => {
-    const rolePerms = defaultRolePermissions.find(rp => rp.role === role);
-    if (!rolePerms) {
+  const { state } = useApp();
+
+  const getPermissionsForRole = (roleId: string, entityType: EntityType): PermissionSet => {
+    const role = state.roles.find(r => r.id === roleId);
+    if (!role) {
       return { create: false, read: false, update: false, delete: false };
     }
-    return rolePerms.permissions[entityType] ?? { create: false, read: false, update: false, delete: false };
+    return role.permissions[entityType] ?? { create: false, read: false, update: false, delete: false };
   };
 
   return (
@@ -65,7 +67,7 @@ export function RoleDefaults() {
       <CardHeader>
         <CardTitle>Default Role Permissions</CardTitle>
         <CardDescription>
-          Baseline CRUD permissions for each role across all entity types
+          Baseline CRUD permissions for each role across all entity types. System roles can be edited in the Roles tab.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -74,9 +76,11 @@ export function RoleDefaults() {
             <TableHeader>
               <TableRow>
                 <TableHead className="role-defaults__entity-header">Entity Type</TableHead>
-                <TableHead className="role-defaults__role-header">Admin</TableHead>
-                <TableHead className="role-defaults__role-header">User</TableHead>
-                <TableHead className="role-defaults__role-header">Viewer</TableHead>
+                {state.roles.map((role) => (
+                  <TableHead key={role.id} className="role-defaults__role-header">
+                    {role.name}
+                  </TableHead>
+                ))}
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -94,15 +98,11 @@ export function RoleDefaults() {
                       {entity.label}
                     </span>
                   </TableCell>
-                  <TableCell>
-                    <PermissionCell permissions={getPermissionsForRole('admin', entity.type)} />
-                  </TableCell>
-                  <TableCell>
-                    <PermissionCell permissions={getPermissionsForRole('user', entity.type)} />
-                  </TableCell>
-                  <TableCell>
-                    <PermissionCell permissions={getPermissionsForRole('viewer', entity.type)} />
-                  </TableCell>
+                  {state.roles.map((role) => (
+                    <TableCell key={role.id}>
+                      <PermissionCell permissions={getPermissionsForRole(role.id, entity.type)} />
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))}
             </TableBody>

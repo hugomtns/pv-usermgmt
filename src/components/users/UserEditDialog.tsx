@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useApp } from '@/contexts/AppContext';
 import { useToast } from '@/hooks/use-toast';
-import { Role, User } from '@/types';
+import { User } from '@/types';
 import './UserEditDialog.css';
 
 interface UserEditDialogProps {
@@ -17,14 +17,14 @@ interface UserEditDialogProps {
 }
 
 export function UserEditDialog({ user, open, onOpenChange }: UserEditDialogProps) {
-  const { dispatch } = useApp();
+  const { state, dispatch } = useApp();
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     function: '',
-    role: 'user' as Role,
+    roleId: 'role-user',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -36,7 +36,7 @@ export function UserEditDialog({ user, open, onOpenChange }: UserEditDialogProps
         lastName: user.lastName,
         email: user.email,
         function: user.function,
-        role: user.role,
+        roleId: user.roleId,
       });
       setErrors({});
     }
@@ -83,7 +83,7 @@ export function UserEditDialog({ user, open, onOpenChange }: UserEditDialogProps
       lastName: formData.lastName.trim(),
       email: formData.email.trim(),
       function: formData.function.trim(),
-      role: formData.role,
+      roleId: formData.roleId,
       updatedAt: new Date().toISOString(),
     };
 
@@ -174,16 +174,18 @@ export function UserEditDialog({ user, open, onOpenChange }: UserEditDialogProps
           <div className="user-edit-dialog__field">
             <Label htmlFor="edit-role">Role *</Label>
             <Select
-              value={formData.role}
-              onValueChange={(value: Role) => setFormData({ ...formData, role: value })}
+              value={formData.roleId}
+              onValueChange={(value: string) => setFormData({ ...formData, roleId: value })}
             >
               <SelectTrigger id="edit-role">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="admin">Admin</SelectItem>
-                <SelectItem value="user">User</SelectItem>
-                <SelectItem value="viewer">Viewer</SelectItem>
+                {state.roles.map((role) => (
+                  <SelectItem key={role.id} value={role.id}>
+                    {role.name}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>

@@ -1,5 +1,5 @@
 import { User, EntityType, PermissionSet, GroupPermissionOverride } from '@/types';
-import { defaultRolePermissions } from '@/data/defaultPermissions';
+import { CustomRole } from '@/types/role';
 
 /**
  * Resolves the effective permissions for a user on a specific entity type
@@ -18,17 +18,19 @@ import { defaultRolePermissions } from '@/data/defaultPermissions';
  * @param entityType - The entity type to check permissions for
  * @param entityId - Optional specific entity ID for entity-level overrides
  * @param permissionOverrides - All permission overrides in the system
+ * @param roles - All roles in the system
  * @returns The effective permission set for the user
  */
 export function resolvePermissions(
   user: User,
   entityType: EntityType,
   entityId: string | undefined,
-  permissionOverrides: GroupPermissionOverride[]
+  permissionOverrides: GroupPermissionOverride[],
+  roles: CustomRole[]
 ): PermissionSet {
   // Step 1: Get role defaults for user's role
-  const rolePerms = defaultRolePermissions.find(rp => rp.role === user.role);
-  const basePermissions: PermissionSet = rolePerms?.permissions[entityType] ?? {
+  const userRole = roles.find(r => r.id === user.roleId);
+  const basePermissions: PermissionSet = userRole?.permissions[entityType] ?? {
     create: false,
     read: false,
     update: false,
@@ -104,11 +106,13 @@ export function resolvePermissions(
  *
  * @param user - The user to resolve permissions for
  * @param permissionOverrides - All permission overrides in the system
+ * @param roles - All roles in the system
  * @returns A map of entity types to their effective permission sets
  */
 export function resolveAllPermissions(
   user: User,
-  permissionOverrides: GroupPermissionOverride[]
+  permissionOverrides: GroupPermissionOverride[],
+  roles: CustomRole[]
 ): Record<EntityType, PermissionSet> {
   const entityTypes: EntityType[] = [
     'projects',
@@ -123,7 +127,7 @@ export function resolveAllPermissions(
   const permissions: Record<string, PermissionSet> = {};
 
   entityTypes.forEach(entityType => {
-    permissions[entityType] = resolvePermissions(user, entityType, undefined, permissionOverrides);
+    permissions[entityType] = resolvePermissions(user, entityType, undefined, permissionOverrides, roles);
   });
 
   return permissions as Record<EntityType, PermissionSet>;

@@ -1,4 +1,4 @@
-import { Users, Pencil, Trash2, UserCog } from 'lucide-react';
+import { Users, Pencil, Trash2, UserCog, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -10,9 +10,10 @@ import './GroupList.css';
 interface GroupListProps {
   onEditGroup?: (group: UserGroup) => void;
   onManageMembers?: (group: UserGroup) => void;
+  onManagePermissions?: (group: UserGroup) => void;
 }
 
-export function GroupList({ onEditGroup, onManageMembers }: GroupListProps) {
+export function GroupList({ onEditGroup, onManageMembers, onManagePermissions }: GroupListProps) {
   const { state, dispatch } = useApp();
   const { toast } = useToast();
 
@@ -81,6 +82,15 @@ export function GroupList({ onEditGroup, onManageMembers }: GroupListProps) {
                   >
                     <UserCog size={16} strokeWidth={1.5} />
                     Members
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => onManagePermissions?.(group)}
+                    className="group-list__action-button"
+                  >
+                    <Shield size={16} strokeWidth={1.5} />
+                    Permissions
                   </Button>
                   <Button
                     variant="outline"

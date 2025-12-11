@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { GroupList } from '@/components/groups/GroupList';
 import { GroupForm } from '@/components/groups/GroupForm';
 import { GroupMembersDialog } from '@/components/groups/GroupMembersDialog';
+import { GroupPermissionsDialog } from '@/components/groups/GroupPermissionsDialog';
 import { UserGroup } from '@/types';
 import './GroupsPage.css';
 
@@ -13,6 +14,7 @@ export function GroupsPage() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [membersDialogOpen, setMembersDialogOpen] = useState(false);
+  const [permissionsDialogOpen, setPermissionsDialogOpen] = useState(false);
 
   const handleEditGroup = (group: UserGroup) => {
     setSelectedGroup(group);
@@ -22,6 +24,11 @@ export function GroupsPage() {
   const handleManageMembers = (group: UserGroup) => {
     setSelectedGroup(group);
     setMembersDialogOpen(true);
+  };
+
+  const handleManagePermissions = (group: UserGroup) => {
+    setSelectedGroup(group);
+    setPermissionsDialogOpen(true);
   };
 
   const handleCreateSuccess = () => {
@@ -49,7 +56,11 @@ export function GroupsPage() {
       </div>
 
       <div className="groups-page__content">
-        <GroupList onEditGroup={handleEditGroup} onManageMembers={handleManageMembers} />
+        <GroupList
+          onEditGroup={handleEditGroup}
+          onManageMembers={handleManageMembers}
+          onManagePermissions={handleManagePermissions}
+        />
       </div>
 
       {/* Create Group Dialog */}
@@ -80,6 +91,13 @@ export function GroupsPage() {
         group={selectedGroup}
         open={membersDialogOpen}
         onOpenChange={setMembersDialogOpen}
+      />
+
+      {/* Manage Permissions Dialog */}
+      <GroupPermissionsDialog
+        group={selectedGroup}
+        open={permissionsDialogOpen}
+        onOpenChange={setPermissionsDialogOpen}
       />
     </div>
   );

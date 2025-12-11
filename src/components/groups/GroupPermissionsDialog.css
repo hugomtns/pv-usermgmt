@@ -1,0 +1,192 @@
+.group-permissions-dialog {
+  max-width: 1200px;
+  max-height: 80vh;
+}
+
+.group-permissions-dialog__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.group-permissions-dialog__layout {
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  gap: var(--space-6);
+  max-height: 60vh;
+  overflow: hidden;
+}
+
+.group-permissions-dialog__form-section,
+.group-permissions-dialog__list-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-height: 0;
+}
+
+.group-permissions-dialog__section-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-foreground);
+  margin: 0;
+}
+
+.group-permissions-dialog__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  overflow-y: auto;
+  padding-right: var(--space-2);
+}
+
+.group-permissions-dialog__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.group-permissions-dialog__permissions-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: var(--font-weight-medium);
+}
+
+.group-permissions-dialog__permissions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.group-permissions-dialog__permission-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.group-permissions-dialog__permission-label {
+  cursor: pointer;
+  user-select: none;
+}
+
+.group-permissions-dialog__submit {
+  margin-top: var(--space-2);
+}
+
+/* Overrides List */
+.group-permissions-dialog__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  overflow-y: auto;
+  padding-right: var(--space-2);
+}
+
+.group-permissions-dialog__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-8);
+  color: var(--color-muted-foreground);
+  text-align: center;
+}
+
+.group-permissions-dialog__override-item {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-card);
+  transition: box-shadow 0.2s ease;
+}
+
+.group-permissions-dialog__override-item:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.group-permissions-dialog__override-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.group-permissions-dialog__override-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.group-permissions-dialog__override-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-foreground);
+  margin: 0;
+}
+
+.group-permissions-dialog__override-scope {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.group-permissions-dialog__entity-names {
+  font-size: var(--font-size-sm);
+  color: var(--color-muted-foreground);
+}
+
+.group-permissions-dialog__delete-button {
+  color: var(--color-destructive);
+}
+
+.group-permissions-dialog__delete-button:hover {
+  background: hsl(var(--destructive) / 0.1);
+}
+
+.group-permissions-dialog__override-permissions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.group-permissions-dialog__override-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-muted-foreground);
+  font-weight: var(--font-weight-medium);
+}
+
+.group-permissions-dialog__permission-badges {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.group-permissions-dialog__permission-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-xs);
+}
+
+@media (max-width: 1024px) {
+  .group-permissions-dialog__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .group-permissions-dialog__form-section {
+    order: 1;
+  }
+
+  .group-permissions-dialog__list-section {
+    order: 2;
+  }
+}

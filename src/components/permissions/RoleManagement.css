@@ -1,0 +1,98 @@
+.role-management {
+  width: 100%;
+}
+
+.role-management__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.role-management__header-content {
+  flex: 1;
+}
+
+.role-management__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-foreground);
+  margin-bottom: var(--space-2);
+}
+
+.role-management__description {
+  font-size: var(--font-size-sm);
+  color: var(--color-muted-foreground);
+}
+
+.role-management__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-4);
+}
+
+.role-management__card {
+  transition: box-shadow 0.2s ease;
+}
+
+.role-management__card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.role-management__card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.role-management__card-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-lg);
+}
+
+.role-management__system-badge {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.role-management__card-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.role-management__summary {
+  padding: var(--space-3);
+  background: var(--color-muted);
+  border-radius: var(--radius);
+}
+
+.role-management__summary-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-muted-foreground);
+  font-weight: var(--font-weight-medium);
+}
+
+.role-management__actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.role-management__delete-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .role-management__header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .role-management__grid {
+    grid-template-columns: 1fr;
+  }
+}
