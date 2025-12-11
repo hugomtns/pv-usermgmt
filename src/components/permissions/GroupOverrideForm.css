@@ -1,0 +1,63 @@
+.group-override-form {
+  width: 100%;
+  max-width: 600px;
+}
+
+.group-override-form__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.group-override-form__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.group-override-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.group-override-form__permissions-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: var(--font-weight-semibold);
+  color: hsl(var(--foreground));
+}
+
+.group-override-form__permissions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-md);
+  background-color: hsl(var(--muted));
+}
+
+.group-override-form__permission-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.group-override-form__permission-label {
+  cursor: pointer;
+  font-weight: var(--font-weight-normal);
+  margin: 0;
+}
+
+.group-override-form__submit {
+  margin-top: var(--space-2);
+  gap: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .group-override-form__permissions {
+    grid-template-columns: 1fr;
+  }
+}
