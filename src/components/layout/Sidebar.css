@@ -44,6 +44,12 @@
   color: hsl(var(--accent-foreground));
 }
 
+.sidebar__link--active {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  font-weight: var(--font-weight-semibold);
+}
+
 .sidebar__link svg {
   flex-shrink: 0;
 }

@@ -1,14 +1,59 @@
-import { AppLayout } from './components/layout/AppLayout'
+import { useState, useEffect } from 'react';
+import { AppLayout } from './components/layout/AppLayout';
+import { UsersPage } from './pages/UsersPage';
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('users');
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1) || 'users';
+      setCurrentPage(hash);
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'users':
+        return <UsersPage />;
+      case 'groups':
+        return (
+          <div>
+            <h1>Groups</h1>
+            <p>Groups page coming soon...</p>
+          </div>
+        );
+      case 'permissions':
+        return (
+          <div>
+            <h1>Permissions</h1>
+            <p>Permissions page coming soon...</p>
+          </div>
+        );
+      case 'entities':
+        return (
+          <div>
+            <h1>Entities</h1>
+            <p>Entities page coming soon...</p>
+          </div>
+        );
+      default:
+        return <UsersPage />;
+    }
+  };
+
   return (
     <AppLayout>
-      <div>
-        <h1>Welcome to PV User Management</h1>
-        <p>Select a section from the sidebar to get started.</p>
-      </div>
+      {renderPage()}
     </AppLayout>
-  )
+  );
 }
 
-export default App
+export default App;
