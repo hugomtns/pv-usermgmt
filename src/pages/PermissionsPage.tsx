@@ -1,5 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { RoleDefaults } from '@/components/permissions/RoleDefaults';
+import { GroupOverrideForm } from '@/components/permissions/GroupOverrideForm';
+import { GroupOverrides } from '@/components/permissions/GroupOverrides';
 import './PermissionsPage.css';
 
 export function PermissionsPage() {
@@ -23,9 +25,13 @@ export function PermissionsPage() {
         </TabsContent>
 
         <TabsContent value="group-overrides" className="permissions-page__tab-content">
-          <div className="permissions-page__placeholder">
-            <h3>Group Permission Overrides</h3>
-            <p>Group override management coming soon...</p>
+          <div className="permissions-page__overrides-layout">
+            <aside className="permissions-page__overrides-sidebar">
+              <GroupOverrideForm />
+            </aside>
+            <main className="permissions-page__overrides-main">
+              <GroupOverrides />
+            </main>
           </div>
         </TabsContent>
       </Tabs>
