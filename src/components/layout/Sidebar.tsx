@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Users, UsersRound, Shield, Building2 } from 'lucide-react';
+import { Users, UsersRound, Shield, Building2, RotateCcw } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useApp } from '@/contexts/AppContext';
+import { useToast } from '@/hooks/use-toast';
 import './Sidebar.css';
 
 export function Sidebar() {
   const [activeHash, setActiveHash] = useState('users');
+  const { dispatch } = useApp();
+  const { toast } = useToast();
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -18,6 +23,16 @@ export function Sidebar() {
       window.removeEventListener('hashchange', handleHashChange);
     };
   }, []);
+
+  const handleResetData = () => {
+    if (window.confirm('Are you sure you want to reset all data to the initial seed data? This action cannot be undone.')) {
+      dispatch({ type: 'RESET_TO_SEED' });
+      toast({
+        title: 'Data reset successful',
+        description: 'All data has been reset to the initial seed state.',
+      });
+    }
+  };
 
   return (
     <aside className="sidebar">
@@ -55,6 +70,18 @@ export function Sidebar() {
           <span>Entities</span>
         </a>
       </nav>
+
+      <div className="sidebar__footer">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleResetData}
+          className="sidebar__reset-button"
+        >
+          <RotateCcw size={16} strokeWidth={1.5} />
+          Reset Data
+        </Button>
+      </div>
     </aside>
   );
 }
