@@ -3,6 +3,7 @@ import { AppLayout } from './components/layout/AppLayout';
 import { UsersPage } from './pages/UsersPage';
 import { GroupsPage } from './pages/GroupsPage';
 import { PermissionsPage } from './pages/PermissionsPage';
+import { EntitiesPage } from './pages/EntitiesPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('users');
@@ -30,12 +31,7 @@ function App() {
       case 'permissions':
         return <PermissionsPage />;
       case 'entities':
-        return (
-          <div>
-            <h1>Entities</h1>
-            <p>Entities page coming soon...</p>
-          </div>
-        );
+        return <EntitiesPage />;
       default:
         return <UsersPage />;
     }
