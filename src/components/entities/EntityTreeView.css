@@ -1,0 +1,120 @@
+.entity-tree-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.entity-tree-view__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.entity-tree-view__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: hsl(var(--foreground));
+}
+
+.entity-tree-view__description {
+  font-size: var(--font-size-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+.entity-tree-view__tree {
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-md);
+  background-color: hsl(var(--card));
+  overflow: hidden;
+}
+
+.entity-tree-view__empty {
+  padding: var(--space-8);
+  text-align: center;
+  color: hsl(var(--muted-foreground));
+  font-size: var(--font-size-sm);
+}
+
+.entity-tree-view__node {
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.entity-tree-view__node:last-child {
+  border-bottom: none;
+}
+
+.entity-tree-view__node-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  transition: background-color 0.15s ease;
+}
+
+.entity-tree-view__node-content:hover {
+  background-color: hsl(var(--muted) / 0.5);
+}
+
+.entity-tree-view__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: hsl(var(--muted-foreground));
+  transition: color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.entity-tree-view__toggle:hover:not(:disabled) {
+  color: hsl(var(--foreground));
+}
+
+.entity-tree-view__toggle:disabled {
+  cursor: default;
+}
+
+.entity-tree-view__toggle-placeholder {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.entity-tree-view__icon {
+  display: flex;
+  align-items: center;
+  color: hsl(var(--muted-foreground));
+  flex-shrink: 0;
+}
+
+.entity-tree-view__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  flex: 1;
+}
+
+.entity-tree-view__name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: hsl(var(--foreground));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.entity-tree-view__type {
+  font-size: var(--font-size-xs);
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.entity-tree-view__children {
+  background-color: hsl(var(--muted) / 0.2);
+}
