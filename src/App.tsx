@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { AppLayout } from './components/layout/AppLayout';
 import { UsersPage } from './pages/UsersPage';
+import { GroupsPage } from './pages/GroupsPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('users');
@@ -24,12 +25,7 @@ function App() {
       case 'users':
         return <UsersPage />;
       case 'groups':
-        return (
-          <div>
-            <h1>Groups</h1>
-            <p>Groups page coming soon...</p>
-          </div>
-        );
+        return <GroupsPage />;
       case 'permissions':
         return (
           <div>
