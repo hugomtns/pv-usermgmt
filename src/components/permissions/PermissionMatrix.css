@@ -1,0 +1,59 @@
+.permission-matrix {
+  width: 100%;
+}
+
+.permission-matrix__table-wrapper {
+  overflow-x: auto;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-md);
+}
+
+.permission-matrix__entity-header {
+  min-width: 200px;
+}
+
+.permission-matrix__action-header {
+  text-align: center;
+  min-width: 100px;
+}
+
+.permission-matrix__entity-cell {
+  font-weight: var(--font-weight-medium);
+}
+
+.permission-matrix__entity-label--child {
+  color: hsl(var(--muted-foreground));
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-sm);
+}
+
+.permission-matrix__entity-label--child::before {
+  content: '└ ';
+  color: hsl(var(--border));
+  margin-right: var(--space-2);
+}
+
+.permission-matrix__icon-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.permission-matrix__checkbox-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.permission-matrix__icon {
+  flex-shrink: 0;
+}
+
+.permission-matrix__icon--granted {
+  color: hsl(142 76% 36%);
+}
+
+.permission-matrix__icon--denied {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.5;
+}
