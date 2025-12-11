@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Pencil, Trash2, Search } from 'lucide-react';
+import { Pencil, Trash2, Search, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -10,9 +10,10 @@ import './UserList.css';
 
 interface UserListProps {
   onEditUser?: (user: User) => void;
+  onViewPermissions?: (user: User) => void;
 }
 
-export function UserList({ onEditUser }: UserListProps) {
+export function UserList({ onEditUser, onViewPermissions }: UserListProps) {
   const { state, dispatch } = useApp();
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -104,6 +105,15 @@ export function UserList({ onEditUser }: UserListProps) {
                   </TableCell>
                   <TableCell>
                     <div className="user-list__actions">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onViewPermissions?.(user)}
+                        className="user-list__action-button"
+                      >
+                        <Eye size={16} strokeWidth={1.5} />
+                        Permissions
+                      </Button>
                       <Button
                         variant="ghost"
                         size="sm"

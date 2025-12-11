@@ -2,16 +2,23 @@ import { useState } from 'react';
 import { UserInviteForm } from '@/components/users/UserInviteForm';
 import { UserList } from '@/components/users/UserList';
 import { UserEditDialog } from '@/components/users/UserEditDialog';
+import { UserPermissionPreview } from '@/components/users/UserPermissionPreview';
 import { User } from '@/types';
 import './UsersPage.css';
 
 export function UsersPage() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [permissionsDialogOpen, setPermissionsDialogOpen] = useState(false);
 
   const handleEditUser = (user: User) => {
     setSelectedUser(user);
     setEditDialogOpen(true);
+  };
+
+  const handleViewPermissions = (user: User) => {
+    setSelectedUser(user);
+    setPermissionsDialogOpen(true);
   };
 
   return (
@@ -29,7 +36,7 @@ export function UsersPage() {
         </aside>
 
         <main className="users-page__main">
-          <UserList onEditUser={handleEditUser} />
+          <UserList onEditUser={handleEditUser} onViewPermissions={handleViewPermissions} />
         </main>
       </div>
 
@@ -37,6 +44,12 @@ export function UsersPage() {
         user={selectedUser}
         open={editDialogOpen}
         onOpenChange={setEditDialogOpen}
+      />
+
+      <UserPermissionPreview
+        user={selectedUser}
+        open={permissionsDialogOpen}
+        onOpenChange={setPermissionsDialogOpen}
       />
     </div>
   );
