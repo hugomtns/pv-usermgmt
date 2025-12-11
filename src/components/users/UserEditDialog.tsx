@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useApp } from '@/contexts/AppContext';
+import { useToast } from '@/hooks/use-toast';
 import { Role, User } from '@/types';
 import './UserEditDialog.css';
 
@@ -17,6 +18,7 @@ interface UserEditDialogProps {
 
 export function UserEditDialog({ user, open, onOpenChange }: UserEditDialogProps) {
   const { dispatch } = useApp();
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -86,6 +88,10 @@ export function UserEditDialog({ user, open, onOpenChange }: UserEditDialogProps
     };
 
     dispatch({ type: 'UPDATE_USER', payload: updatedUser });
+    toast({
+      title: 'User updated successfully',
+      description: `Changes to ${updatedUser.firstName} ${updatedUser.lastName} have been saved.`,
+    });
     onOpenChange(false);
   };
 

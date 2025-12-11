@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { useApp } from '@/contexts/AppContext';
+import { useToast } from '@/hooks/use-toast';
 import { User } from '@/types';
 import './UserList.css';
 
@@ -15,6 +16,7 @@ interface UserListProps {
 
 export function UserList({ onEditUser, onViewPermissions }: UserListProps) {
   const { state, dispatch } = useApp();
+  const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredUsers = state.users.filter(user => {
@@ -29,6 +31,10 @@ export function UserList({ onEditUser, onViewPermissions }: UserListProps) {
   const handleDelete = (user: User) => {
     if (window.confirm(`Are you sure you want to delete ${user.firstName} ${user.lastName}?`)) {
       dispatch({ type: 'DELETE_USER', payload: user.id });
+      toast({
+        title: 'User deleted',
+        description: `${user.firstName} ${user.lastName} has been removed from the system.`,
+      });
     }
   };
 

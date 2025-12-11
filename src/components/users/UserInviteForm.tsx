@@ -6,11 +6,13 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useApp } from '@/contexts/AppContext';
+import { useToast } from '@/hooks/use-toast';
 import { Role, User } from '@/types';
 import './UserInviteForm.css';
 
 export function UserInviteForm() {
   const { dispatch } = useApp();
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -70,6 +72,11 @@ export function UserInviteForm() {
     };
 
     dispatch({ type: 'ADD_USER', payload: newUser });
+
+    toast({
+      title: 'User invited successfully',
+      description: `${newUser.firstName} ${newUser.lastName} has been added to the system.`,
+    });
 
     // Clear form
     setFormData({

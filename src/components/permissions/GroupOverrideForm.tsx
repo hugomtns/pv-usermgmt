@@ -7,11 +7,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { EntitySelector } from './EntitySelector';
 import { useApp } from '@/contexts/AppContext';
+import { useToast } from '@/hooks/use-toast';
 import { EntityType, GroupPermissionOverride } from '@/types';
 import './GroupOverrideForm.css';
 
 export function GroupOverrideForm() {
   const { state, dispatch } = useApp();
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     groupId: '',
     entityType: '' as EntityType | '',
@@ -64,6 +66,12 @@ export function GroupOverrideForm() {
     };
 
     dispatch({ type: 'ADD_PERMISSION_OVERRIDE', payload: newOverride });
+
+    const groupName = state.groups.find(g => g.id === formData.groupId)?.name || 'Group';
+    toast({
+      title: 'Permission override added',
+      description: `Override for ${groupName} on ${formData.entityType} has been created.`,
+    });
 
     // Reset form
     setFormData({

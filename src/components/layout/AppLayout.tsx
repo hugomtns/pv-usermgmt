@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { Sidebar } from './Sidebar'
+import { Toaster } from '@/components/ui/toaster'
 import './AppLayout.css'
 
 interface AppLayoutProps {
@@ -15,6 +16,7 @@ export function AppLayout({ children }: AppLayoutProps) {
           {children}
         </div>
       </main>
+      <Toaster />
     </div>
   )
 }

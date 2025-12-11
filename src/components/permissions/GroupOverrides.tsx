@@ -3,11 +3,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useApp } from '@/contexts/AppContext';
+import { useToast } from '@/hooks/use-toast';
 import { EntityType } from '@/types';
 import './GroupOverrides.css';
 
 export function GroupOverrides() {
   const { state, dispatch } = useApp();
+  const { toast } = useToast();
 
   const getEntityTypeLabel = (type: EntityType): string => {
     const labels: Record<EntityType, string> = {
@@ -46,6 +48,10 @@ export function GroupOverrides() {
   const handleDelete = (id: string, groupName: string) => {
     if (window.confirm(`Are you sure you want to delete this permission override for "${groupName}"?`)) {
       dispatch({ type: 'DELETE_PERMISSION_OVERRIDE', payload: id });
+      toast({
+        title: 'Permission override deleted',
+        description: `Override for ${groupName} has been removed.`,
+      });
     }
   };
 

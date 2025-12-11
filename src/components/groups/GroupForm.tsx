@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useApp } from '@/contexts/AppContext';
+import { useToast } from '@/hooks/use-toast';
 import { UserGroup } from '@/types';
 import './GroupForm.css';
 
@@ -16,6 +17,7 @@ interface GroupFormProps {
 
 export function GroupForm({ group, mode, onSuccess }: GroupFormProps) {
   const { dispatch } = useApp();
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -68,6 +70,10 @@ export function GroupForm({ group, mode, onSuccess }: GroupFormProps) {
       };
 
       dispatch({ type: 'ADD_GROUP', payload: newGroup });
+      toast({
+        title: 'Group created successfully',
+        description: `${newGroup.name} has been added to the system.`,
+      });
 
       // Clear form
       setFormData({
@@ -84,6 +90,10 @@ export function GroupForm({ group, mode, onSuccess }: GroupFormProps) {
       };
 
       dispatch({ type: 'UPDATE_GROUP', payload: updatedGroup });
+      toast({
+        title: 'Group updated successfully',
+        description: `Changes to ${updatedGroup.name} have been saved.`,
+      });
     }
 
     onSuccess?.();

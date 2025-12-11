@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useApp } from '@/contexts/AppContext';
+import { useToast } from '@/hooks/use-toast';
 import { UserGroup } from '@/types';
 import './GroupList.css';
 
@@ -13,10 +14,15 @@ interface GroupListProps {
 
 export function GroupList({ onEditGroup, onManageMembers }: GroupListProps) {
   const { state, dispatch } = useApp();
+  const { toast } = useToast();
 
   const handleDelete = (group: UserGroup) => {
     if (window.confirm(`Are you sure you want to delete the group "${group.name}"? This will remove all members from the group.`)) {
       dispatch({ type: 'DELETE_GROUP', payload: group.id });
+      toast({
+        title: 'Group deleted',
+        description: `${group.name} has been removed from the system.`,
+      });
     }
   };
 
