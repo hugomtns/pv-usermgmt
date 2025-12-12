@@ -71,6 +71,8 @@
 
 .user-permission-preview__icon {
   flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .user-permission-preview__icon--granted {
