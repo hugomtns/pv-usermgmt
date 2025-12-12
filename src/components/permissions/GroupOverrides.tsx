@@ -17,6 +17,7 @@ export function GroupOverrides({ readOnly = false }: GroupOverridesProps) {
 
   const getEntityTypeLabel = (type: EntityType): string => {
     const labels: Record<EntityType, string> = {
+      workspaces: 'Workspaces',
       projects: 'Projects',
       project_files: 'Project Files',
       financial_models: 'Financial Models',

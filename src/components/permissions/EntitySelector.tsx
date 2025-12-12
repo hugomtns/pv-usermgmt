@@ -16,6 +16,7 @@ export function EntitySelector({ entityType, scope, selectedEntityIds, onChange 
 
   const getEntityTypeLabel = (type: EntityType): string => {
     const labels: Record<EntityType, string> = {
+      workspaces: 'Workspaces',
       projects: 'Projects',
       project_files: 'Project Files',
       financial_models: 'Financial Models',

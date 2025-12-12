@@ -12,12 +12,13 @@ interface EntityHierarchy {
 }
 
 const entityHierarchy: EntityHierarchy[] = [
-  { type: 'projects', label: 'Projects', level: 0 },
-  { type: 'project_files', label: 'Project Files', level: 1 },
-  { type: 'financial_models', label: 'Financial Models', level: 1 },
-  { type: 'designs', label: 'Designs', level: 1 },
-  { type: 'design_files', label: 'Design Files', level: 2 },
-  { type: 'design_comments', label: 'Design Comments', level: 2 },
+  { type: 'workspaces', label: 'Workspaces', level: 0 },
+  { type: 'projects', label: 'Projects', level: 1 },
+  { type: 'project_files', label: 'Project Files', level: 2 },
+  { type: 'financial_models', label: 'Financial Models', level: 2 },
+  { type: 'designs', label: 'Designs', level: 2 },
+  { type: 'design_files', label: 'Design Files', level: 3 },
+  { type: 'design_comments', label: 'Design Comments', level: 3 },
   { type: 'user_management', label: 'User Management', level: 0 },
 ];
 

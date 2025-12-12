@@ -29,6 +29,7 @@ export const seedRoles: CustomRole[] = [
     description: 'Full system access including user management',
     isSystem: true,
     permissions: {
+      workspaces: fullAccess,
       projects: fullAccess,
       project_files: fullAccess,
       financial_models: fullAccess,
@@ -46,6 +47,7 @@ export const seedRoles: CustomRole[] = [
     description: 'Standard user access with full project permissions',
     isSystem: true,
     permissions: {
+      workspaces: fullAccess,
       projects: fullAccess,
       project_files: fullAccess,
       financial_models: fullAccess,
@@ -63,6 +65,7 @@ export const seedRoles: CustomRole[] = [
     description: 'Read-only access to projects and files',
     isSystem: true,
     permissions: {
+      workspaces: readOnly,
       projects: readOnly,
       project_files: readOnly,
       financial_models: readOnly,

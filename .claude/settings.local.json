@@ -14,7 +14,8 @@
       "Bash(npx tailwindcss:*)",
       "Bash(npx shadcn@latest add:*)",
       "Bash(git push:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(dir \"C:\\Users\\hmmar\\GitHub\\pv-usermgmt\")"
     ]
   },
   "enableAllProjectMcpServers": true,

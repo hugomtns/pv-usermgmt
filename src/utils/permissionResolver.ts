@@ -115,6 +115,7 @@ export function resolveAllPermissions(
   roles: CustomRole[]
 ): Record<EntityType, PermissionSet> {
   const entityTypes: EntityType[] = [
+    'workspaces',
     'projects',
     'project_files',
     'financial_models',

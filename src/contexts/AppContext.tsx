@@ -52,8 +52,39 @@ const getInitialState = (): AppState => {
     return user;
   });
 
+  // Migrate roles to add workspace permissions if missing
+  const migratedRoles = migratedState.roles.map((role: any) => {
+    if (!role.permissions.workspaces) {
+      needsMigration = true;
+      const workspacePermission =
+        role.id === 'role-admin' || role.id === 'role-user'
+          ? { create: true, read: true, update: true, delete: true }
+          : role.id === 'role-viewer'
+          ? { create: false, read: true, update: false, delete: false }
+          : { create: false, read: false, update: false, delete: false };
+
+      return {
+        ...role,
+        permissions: {
+          workspaces: workspacePermission,
+          ...role.permissions,
+        },
+      };
+    }
+    return role;
+  });
+
+  // Migrate entities to workspace structure if needed
+  let migratedEntities = storedState.entities;
+  if (migratedEntities && migratedEntities.length > 0 && migratedEntities[0]?.type !== 'workspaces') {
+    needsMigration = true;
+    migratedEntities = seedEntities; // Use new workspace structure
+  }
+
   if (needsMigration) {
     migratedState.users = migratedUsers;
+    migratedState.roles = migratedRoles;
+    migratedState.entities = migratedEntities;
     // Save migrated state back to localStorage
     setStorageItem(STORAGE_KEYS.APP_STATE, migratedState);
   }

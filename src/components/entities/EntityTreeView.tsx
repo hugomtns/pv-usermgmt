@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronRight, ChevronDown, Folder, FileText, DollarSign, Palette, File, MessageSquare } from 'lucide-react';
+import { ChevronRight, ChevronDown, Briefcase, Folder, FileText, DollarSign, Palette, File, MessageSquare } from 'lucide-react';
 import { Entity, EntityType } from '@/types';
 import './EntityTreeView.css';
 
@@ -14,6 +14,8 @@ interface EntityNodeProps {
 
 function getEntityIcon(type: EntityType) {
   switch (type) {
+    case 'workspaces':
+      return <Briefcase size={16} strokeWidth={1.5} />;
     case 'projects':
       return <Folder size={16} strokeWidth={1.5} />;
     case 'project_files':
@@ -33,6 +35,7 @@ function getEntityIcon(type: EntityType) {
 
 function getEntityTypeLabel(type: EntityType): string {
   const labels: Record<EntityType, string> = {
+    workspaces: 'Workspace',
     projects: 'Project',
     project_files: 'File',
     financial_models: 'Financial Model',
@@ -98,7 +101,7 @@ export function EntityTreeView({ entities }: EntityTreeViewProps) {
       <div className="entity-tree-view__header">
         <h2 className="entity-tree-view__title">Entity Browser</h2>
         <p className="entity-tree-view__description">
-          Browse the hierarchical structure of projects, files, designs, and related entities
+          Browse the hierarchical structure of workspaces, projects, files, designs, and related entities
         </p>
       </div>
 

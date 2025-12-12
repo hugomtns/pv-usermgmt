@@ -34,6 +34,7 @@ export function GroupPermissionsDialog({ group, open, onOpenChange }: GroupPermi
   });
 
   const entityTypes: EntityType[] = [
+    'workspaces',
     'projects',
     'project_files',
     'financial_models',
@@ -44,6 +45,7 @@ export function GroupPermissionsDialog({ group, open, onOpenChange }: GroupPermi
 
   const getEntityTypeLabel = (type: EntityType): string => {
     const labels: Record<EntityType, string> = {
+      workspaces: 'Workspaces',
       projects: 'Projects',
       project_files: 'Project Files',
       financial_models: 'Financial Models',

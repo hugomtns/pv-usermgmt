@@ -25,6 +25,7 @@ export const defaultRolePermissions: RolePermissions[] = [
   {
     role: 'admin',
     permissions: {
+      workspaces: fullAccess,
       projects: fullAccess,
       project_files: fullAccess,
       financial_models: fullAccess,
@@ -37,6 +38,7 @@ export const defaultRolePermissions: RolePermissions[] = [
   {
     role: 'user',
     permissions: {
+      workspaces: fullAccess,
       projects: fullAccess,
       project_files: fullAccess,
       financial_models: fullAccess,
@@ -49,6 +51,7 @@ export const defaultRolePermissions: RolePermissions[] = [
   {
     role: 'viewer',
     permissions: {
+      workspaces: readOnly,
       projects: readOnly,
       project_files: readOnly,
       financial_models: readOnly,

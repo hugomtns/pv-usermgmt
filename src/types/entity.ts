@@ -1,4 +1,5 @@
 export type EntityType =
+  | 'workspaces'
   | 'projects'
   | 'project_files'
   | 'financial_models'
